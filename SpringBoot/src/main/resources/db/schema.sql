@@ -1,0 +1,7 @@
+DROP TABLE store IF EXISTS;
+
+CREATE TABLE store (
+  storeId         INTEGER IDENTITY PRIMARY KEY,
+  storeName VARCHAR(30)
+);
+
