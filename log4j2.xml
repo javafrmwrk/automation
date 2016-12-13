@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="DEBUG">
+	<Appenders>
+
+		<Console name="console-log" target="SYSTEM_OUT">
+			<PatternLayout
+				pattern="%d{dd MMM yyyy HH:mm:ss,SSS} %-5p [%t] %c{1}:%M:%L - %m%n" />
+		</Console>
+
+		<!-- Finance Module -->
+		<RollingFile name="walmart-log" fileName="C:/log/walmartLog/walmartLog.log"
+			filePattern="C:/log/walmartLog/archive/walmartLog-%d{yyyy-MM-dd}-%i.gz">
+			<PatternLayout>
+				<Pattern>%d{dd MMM yyyy HH:mm:ss,SSS} %-5p [%t] %c{1}:%M:%L - %m%n
+				</Pattern>
+			</PatternLayout>
+			<Policies>
+				<!-- To rollover old file on JVM startup -->
+				<OnStartupTriggeringPolicy />
+				<!-- To rollover files at every midnight -->
+
+				<TimeBasedTriggeringPolicy interval="1"
+					modulate="true" />
+				<!-- To rollover files when it reaches 25MB -->
+				<SizeBasedTriggeringPolicy size="25 MB" />
+			</Policies>
+
+			<DefaultRolloverStrategy max="50" />
+		</RollingFile>
+
+
+	</Appenders>
+	<Loggers>
+
+
+	 <Logger name="logger2.logger2" level="DEBUG" additivity="false">
+			<AppenderRef ref="walmart-log" />
+		</Logger>
+		<!-- Root Logger -->
+		<Root level="ERROR" additivity="false">
+
+			 <AppenderRef ref="console-log" />
+		</Root>
+	</Loggers>
+</Configuration>
